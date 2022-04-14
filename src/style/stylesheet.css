@@ -1,0 +1,289 @@
+body, html, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.header-reminder-text {
+  color: #888888;
+}
+
+.app-body {
+  max-width: 1220px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-shrink: 1;
+}
+
+.main-content {
+  padding: 1em;
+  overflow-y: scroll;
+  background-color: #f5f8fa;
+  flex-grow: 1;
+  border-top: 20px solid #f07c21;
+}
+
+.bp3-navbar {
+  flex-shrink: 0;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.new-project-div label {
+  margin-bottom: 5px;
+}
+
+.new-project-form {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-project-input {
+  width: 100%;
+}
+
+.info-label-popover .bp3-popover-wrapper {
+  margin-top: 0px !important;
+}
+
+.info-popover-button {
+  margin-right: -12px;
+  /*margin-top: -5px; */
+}
+
+.popover-content {
+  padding: 10px;
+  margin: 0px;
+}
+
+.help-popover-content {
+  padding: 10px;
+}
+
+.project-card {
+  max-width: 30%;
+  min-width: 150px;
+  flex: 1;
+  margin: 5px;
+}
+
+.project-list-header {
+  display: flex;
+  margin: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project-list-footer {
+  width: 100%;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.project-settings-content-div {
+  padding: 5px;
+}
+
+.project-settings-content-div button {
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 150px;
+}
+
+.add-project-button {
+  margin: 0.67em 0;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: row;
+  min-height: 50vh;
+}
+
+.panel {
+  flex: 1;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bp3-card.panel-card {
+  max-width: 100%;
+  min-width: 150px;
+  flex: 1;
+  margin: 5px;
+  padding: 15px;
+}
+
+.scrollable-panel-content {
+  min-width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+}
+
+.panel-card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.panel-card-header .bp3-button {
+  height: 30px;
+}
+
+.add-button {
+  height: 30px;
+  margin-left: 5px;
+}
+
+.panel-list-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.panel-list-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.bp3-form-group .bp3-label {
+  width: 150px;
+}
+
+.label-with-add-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.validated-input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.invalid-input-warning {
+  margin-left: 1em;
+  font-size: 12px;
+}
+
+.inline-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inline-input .bp3-label {
+  align-self: center;
+}
+
+.inline-input .bp3-form-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.inline-input .bp3-form-content .bp3-input-group {
+  width: 150px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+
+.inline-input .bp3-form-content .bp3-file-input {
+  width: 200px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.dropdown-button {
+  width: 140px;
+  margin-right: 5px;
+  padding-right: 5px;
+  margin-left: 5px;
+}
+
+.bp3-button.dropdown-button-twoline {
+  min-height: 42px;
+}
+
+.inline-input .bp3-form-content .building-type-button-header-div {
+  width: 150px;
+  padding-right: 5px;
+  padding-left: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.bp3-form-content .edit-cost-curve-button {
+  width: 150px;
+  padding: 5px;
+}
+
+.inline-input .bp3-form-content .bp3-input-group input {
+  width: 100%;
+  min-width: 100%;
+}
+
+.advanced-options-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.advanced-options-wrapper div {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.workspace-output {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.bp3-inline .bp3-label {
+  width: 250px;
+  text-align: right;
+}
+
+input {
+  min-width: 250px;
+}
+
+.empty-button {
+  flex-shrink: 0;
+  width: 30px;
+}
+
+.overlay-content {
+  --container-width: 750px;
+  width: var(--container-width);
+  left: calc(50vw - var(--container-width)/2);
+  margin: 10vh 0;
+}
