@@ -17,11 +17,15 @@ export class Workspace extends Component<IWorkspaceProps, IWorkspaceState> {
   
   constructor(props: IWorkspaceProps) {
     super(props);
+
     this.state = {
       project: props.item,
       tabId: "song-list",
       uploadProgress: 0,
     }
+  }
+
+  componentDidMount() {
   }
 
   componentDidUpdate(prevProps: IWorkspaceProps) {
@@ -38,25 +42,27 @@ export class Workspace extends Component<IWorkspaceProps, IWorkspaceState> {
     return { __html: `The value in the text box is "${this.props.item.name}"` };
   }
 
-  renderFileUploader = () => {
+  renderFileUploader = (callback: (url: string) => void) => {
     return (  
       <div>
         <FileInput
           text={ "Choose file..." }
-          onInputChange={(e) => { this.handleFileInput(e) }} 
+          onInputChange={(e) => { 
+            this.handleFileInput(e, callback);
+          }} 
           inputProps={{ accept: "audio/*" }}/>
       </div>  
     )
   }
 
-  handleFileInput = (e: FormEvent<HTMLInputElement>) => {
+  handleFileInput = (e: FormEvent<HTMLInputElement>, callback: (url: string) => void) => {
     const input = e.target as HTMLInputElement;
     if (input && input.files && input.files.length) {
-      this.startUpload(input.files[0]);
+      this.startUpload(input.files[0], callback);
     }
   }
 
-  startUpload = (f: File) => {
+  startUpload = (f: File, callback: (url: string) => void) => {
     this.handleUploadStart();
     const storageRef = firebase.storage().ref(`audio/${this.props.currentUser!.uid}`);
     const fileRef = storageRef.child(f.name);
@@ -67,7 +73,7 @@ export class Workspace extends Component<IWorkspaceProps, IWorkspaceState> {
       }, (err: Error) => {
         this.handleUploadError(err);
       }, () => {  
-        this.handleUploadSuccess(uploadTask.snapshot);
+        this.handleUploadSuccess(uploadTask.snapshot, callback);
       }
     );
   }
@@ -95,16 +101,16 @@ export class Workspace extends Component<IWorkspaceProps, IWorkspaceState> {
 
   handleUploadError = (e: Error) => {
     this.handleUploadEnded(false);
+    console.log(e.message);
     AppToaster.show({ intent: Intent.DANGER, message: `File could not be uploaded.` });
   }
 
-  handleUploadSuccess = (snapshot: firebase.storage.UploadTaskSnapshot) => {
+  handleUploadSuccess = async (snapshot: firebase.storage.UploadTaskSnapshot, callback: (url: string) => void) => {
     this.handleUploadEnded(true);
     const fileName = snapshot.metadata.name;
-    console.log(fileName);
-
-    // todo: handle this
-    
+    const songUrl = await snapshot.ref.getDownloadURL()
+    callback(songUrl);
+    console.log(fileName);    
   }
 
   handleUploadEnded = (success: boolean) => {
@@ -130,6 +136,7 @@ export class Workspace extends Component<IWorkspaceProps, IWorkspaceState> {
           <Tab id="song-list" title={"Song list"} panel={
             <SongListPanel
               updateProject={this.props.updateProject}
+              renderFileUploader={this.renderFileUploader}
               title="Songs"
               project={this.state.project}/>
           } />

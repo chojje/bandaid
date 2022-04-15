@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import { IProject } from "./Data";
+import { ChangeEvent, FormEvent, ReactNode } from "react";
+import { IDictBool, IProject, Song } from "./Data";
 
 /* Panels */
 
@@ -30,6 +30,39 @@ export interface IInputField extends IInput {
 export interface ISongListPanelProps extends IPanelProps {
   project: IProject;
   updateProject(project: IProject): void;
- }
+  renderFileUploader: ((callback: (url: string) => void) => ReactNode);
+}
 
-export interface ISongListPanelState extends IPanelState { }
+export interface ISongListPanelState extends IPanelState {
+  project: IProject;
+  addSongPopoverOpen: boolean;
+  songIsOpen: IDictBool;
+}
+
+export interface INewSongFormState { }
+
+export interface INewSongFormProps {
+  addSong(value: string): void;
+  postSubmitHandler: any;
+}
+
+export interface ISongCardProps {
+  song: Song;
+  renderFileUploader: ((callback: (url: string) => void) => ReactNode)
+  addSongVersion(name: string, songId: string, url: string): void;
+}
+
+export interface ISongCardState {
+  addSongVersionPopoverOpen: boolean;
+}
+
+export interface INewSongVersionFormState {
+  songUrl: string;
+}
+
+export interface INewSongVersionFormProps {
+  renderFileUploader: ((callback: (url: string) => void) => ReactNode);
+  addSongVersion(name: string, songId: string, url: string): void;
+  postSubmitHandler: any;
+  songId: string;
+}

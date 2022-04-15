@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // internal
 import { APP_VERSION } from '../../constants';
-import { IProject } from '../Data';
+import { IDictSong, IProject } from '../Data';
 
 export class Project implements IProject {
   appVersion = APP_VERSION;
@@ -12,6 +12,7 @@ export class Project implements IProject {
   owner: string;
   deleted = false;
   timeStamp: number = Date.now();
+  songs: IDictSong;
 
   static fromIProject(iProject: IProject): Project {
     let project = new this(iProject.name, iProject.owner);
@@ -22,6 +23,7 @@ export class Project implements IProject {
   constructor(name: string, owner: string) {
     this.name = name;
     this.owner = owner;
+    this.songs = {};
   }
 
   get jsonData(): IProject {

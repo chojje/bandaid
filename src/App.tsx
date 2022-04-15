@@ -115,12 +115,8 @@ class App extends Component<IAppProps, IAppState> {
       }
 
     });
-
-  }
-
-  componentWillMount() {
     fetch(changelogPath).then((response) => response.text()).then((text) => {
-      this.setState({ changelog: text })
+      this.setState({ changelog: text });
     })
   }
 
