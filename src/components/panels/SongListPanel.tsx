@@ -1,7 +1,6 @@
 // external
 import { Button, Card, Collapse, Popover, PopoverInteractionKind, Position } from '@blueprintjs/core';
 import React, { Component } from 'react';
-import ReactAudioPlayer from 'react-audio-player';
 import { set as _fpSet } from 'lodash/fp';
 import { debounce as _debounce } from 'lodash';
 
