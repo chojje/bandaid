@@ -8,6 +8,7 @@ import { debounce as _debounce } from 'lodash';
 import { ISongListPanelProps, ISongListPanelState, Song, INewSongFormProps, INewSongFormState, SongVersion } from '../../types';
 import { SongCard } from './cards/SongCard';
 export class SongListPanel extends Component<ISongListPanelProps, ISongListPanelState> {
+  
   constructor(props: ISongListPanelProps) {
     super(props);
     this.state = {
@@ -60,6 +61,19 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
     this.performDatabaseOperation(valid, operation);
   }
 
+  deleteSong = (id: string) => {
+    const valid = (newState: ISongListPanelState) => {
+      return true;
+    }
+
+    const operation = (newState: ISongListPanelState) => {
+      // todo: remove uploaded files associated with song
+      delete newState.project.songs[id];
+    }
+
+    this.performDatabaseOperation(valid, operation);
+  }
+
   closeAddSongPopover = () => {
     this.setState({
       addSongPopoverOpen: false,
@@ -101,8 +115,23 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
     this.performDatabaseOperation(valid, operation);
   }
 
+  deleteSongVersion = (songId: string, versionId: string) => {
+    const valid = (newState: ISongListPanelState) => {
+      return true;
+    }
+
+    const operation = (newState: ISongListPanelState) => {
+      // todo: remove uploaded files associated with song
+      newState.project.songs[songId].previousSongVersions = newState.project.songs[songId].previousSongVersions.filter(
+        item => item.id !== versionId
+      );
+    }
+
+    this.performDatabaseOperation(valid, operation);
+  }
+
   render() {
-    const { project } = this.props;
+    const { project, renderFileUploader } = this.props;
     return (
       <div>
         <h1>{this.props.title}</h1>
@@ -119,11 +148,13 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
                 <Collapse key={`${songId}-collapse`} isOpen={songOpen}>
                   <SongCard
                     song={song}
-                    renderFileUploader={this.props.renderFileUploader}
+                    renderFileUploader={renderFileUploader}
                     addSongVersion={this.addSongVersion}
                     handleChange={this.handleChange}
                     handleVolumeChange={this.handleVolumeChange}
-                    volume={this.state.volume}/>
+                    volume={this.state.volume}
+                    deleteSong={this.deleteSong}
+                    deleteSongVersion={this.deleteSongVersion}/>
                 </Collapse>
               </Card>
             )

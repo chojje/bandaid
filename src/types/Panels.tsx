@@ -53,11 +53,14 @@ export interface ISongCardProps {
   addSongVersion(name: string, songId: string, url: string): void;
   handleChange(path: string, value: string): void;
   handleVolumeChange(volume: number): void;
+  deleteSong(id: string): void;
+  deleteSongVersion(songId: string, versionId: string): void;
   volume: number;
 }
 
 export interface ISongCardState {
   addSongVersionPopoverOpen: boolean;
+  deleteSongWarningOpen: boolean;
   songVersionsOpen: boolean;
 }
 
