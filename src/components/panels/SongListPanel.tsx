@@ -14,6 +14,7 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
       project: props.project,
       songIsOpen: {},
       addSongPopoverOpen: false,
+      volume: 1.0,
     }
 
   }
@@ -71,6 +72,10 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
     this.setState(newState);
   }
 
+  handleVolumeChange = (volume: number) => {
+    this.setState({ volume });
+  }
+
   addSongVersion = (name: string, songId: string, url: string) => {
     const valid = (newState: ISongListPanelState) => {
       return true;
@@ -112,7 +117,13 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
                   <Button minimal className="bp3-button" icon={songOpen ? "arrow-up" : "arrow-down"}/>
                 </div>
                 <Collapse key={`${songId}-collapse`} isOpen={songOpen}>
-                  <SongCard song={song} renderFileUploader={this.props.renderFileUploader} addSongVersion={this.addSongVersion}/>
+                  <SongCard
+                    song={song}
+                    renderFileUploader={this.props.renderFileUploader}
+                    addSongVersion={this.addSongVersion}
+                    handleChange={this.handleChange}
+                    handleVolumeChange={this.handleVolumeChange}
+                    volume={this.state.volume}/>
                 </Collapse>
               </Card>
             )

@@ -37,6 +37,7 @@ export interface ISongListPanelState extends IPanelState {
   project: IProject;
   addSongPopoverOpen: boolean;
   songIsOpen: IDictBool;
+  volume: number;
 }
 
 export interface INewSongFormState { }
@@ -50,10 +51,14 @@ export interface ISongCardProps {
   song: Song;
   renderFileUploader: ((callback: (url: string) => void) => ReactNode)
   addSongVersion(name: string, songId: string, url: string): void;
+  handleChange(path: string, value: string): void;
+  handleVolumeChange(volume: number): void;
+  volume: number;
 }
 
 export interface ISongCardState {
   addSongVersionPopoverOpen: boolean;
+  songVersionsOpen: boolean;
 }
 
 export interface INewSongVersionFormState {

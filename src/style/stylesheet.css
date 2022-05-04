@@ -257,6 +257,11 @@ ul {
   flex-direction: column;
 }
 
+.song-card {
+  display: flex;
+  flex-direction: column;
+}
+
 .advanced-options-wrapper div {
   margin-top: 2px;
   margin-bottom: 2px;
