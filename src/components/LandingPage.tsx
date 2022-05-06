@@ -5,6 +5,7 @@ import { Collapse, Button, Card } from "@blueprintjs/core";
 
 // internal
 import { ILandingPageProps, ILandingPageState } from '../types';
+import { strings } from '../constants/textData'
 
 export class LandingPage extends Component<ILandingPageProps, ILandingPageState> {
   constructor(props: ILandingPageProps) {
@@ -24,7 +25,10 @@ export class LandingPage extends Component<ILandingPageProps, ILandingPageState>
     return (
       <div>
         <Card key={`info-card`} id={`info-card`} elevation={0} className="panel-card bp3-elevation-0">
-          <h1>bandaid</h1>
+          <div className="landing-page-header">
+            <img className="bp3-align-right landing-page-logo" src="/logo192.png" alt="App Logo" />
+            <h1>{strings.appName}</h1>
+          </div>
           <p>Manage your band's songs, shows, rehearsals and more!</p>
         </Card>
         <Card key={`changelog-card`} id={`changelog-card`} elevation={this.state.changelogOpen ? 2 : 0} className="panel-card bp3-elevation-0 bp3-interactive">

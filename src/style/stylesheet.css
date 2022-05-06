@@ -267,6 +267,23 @@ ul {
   flex-direction: column;
 }
 
+.landing-page-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.landing-page-logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px !important;
+}
+
+.header-app-logo {
+  width: 20px;
+  margin-right: 10px !important;
+}
+
 .narrow-delete-button {
   max-width: 300px;
   padding: 10px;

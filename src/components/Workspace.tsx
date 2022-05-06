@@ -102,7 +102,7 @@ export class Workspace extends Component<IWorkspaceProps, IWorkspaceState> {
   handleUploadError = (e: Error) => {
     this.handleUploadEnded(false);
     console.log(e.message);
-    AppToaster.show({ intent: Intent.DANGER, message: `File could not be uploaded.` });
+    AppToaster.show({ intent: Intent.DANGER, message: `File could not be uploaded. The maximum file size is 100 MB.` });
   }
 
   handleUploadSuccess = async (snapshot: firebase.storage.UploadTaskSnapshot, callback: (url: string) => void) => {

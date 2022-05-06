@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Popover, PopoverInteractionKind, Position } from '@blueprintjs/core';
 import { IHeaderProps, IHeaderState, IUserInfoProps, IUserInfoState } from '../types';
+import { strings } from '../constants/textData'
 
 export class Header extends Component<IHeaderProps, IHeaderState> {
   constructor(props: IHeaderProps) {
@@ -23,7 +24,10 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
     return (
       <nav className="bp3-navbar header-navbar">
         <div className="bp3-navbar-group bp3-align-left">
-          <Link className="bp3-button bp3-minimal bp3-navbar-heading" to="/" onClick={() => this.props.exitProject()}>bandaid</Link>
+          <Link className="bp3-button bp3-minimal bp3-navbar-heading" to="/" onClick={() => this.props.exitProject()}>
+            <img className="bp3-align-right header-app-logo" src="/logo192.png" alt="App Logo" />
+            {strings.appName}
+          </Link>
         </div> {
           this.props.authenticated? (
               <div className="bp3-navbar-group bp3-align-right"> {
