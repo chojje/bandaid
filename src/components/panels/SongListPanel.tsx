@@ -5,7 +5,7 @@ import { set as _fpSet } from 'lodash/fp';
 import { debounce as _debounce } from 'lodash';
 
 // internal
-import { ISongListPanelProps, ISongListPanelState, Song, INewSongFormProps, INewSongFormState, SongVersion } from '../../types';
+import { ISongListPanelProps, ISongListPanelState, Song, INewSongFormProps, INewSongFormState, SongVersion, SongComment } from '../../types';
 import { SongCard } from './cards/SongCard';
 export class SongListPanel extends Component<ISongListPanelProps, ISongListPanelState> {
   
@@ -115,6 +115,24 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
     this.performDatabaseOperation(valid, operation);
   }
 
+  addComment = (author: string, timestamp: string, commentText: string, songId: string) => {
+    const valid = (newState: ISongListPanelState) => {
+      return true;
+    }
+    
+    const operation = (newState: ISongListPanelState) => {
+      const song = newState.project.songs[songId];
+      if (!song.currentSongVersion) {
+        return;
+      }
+      const comment = new SongComment(author, commentText, timestamp);
+      song.currentSongVersion.comments.push(comment);
+      newState.project.songs[song.id] = song;
+    }
+
+    this.performDatabaseOperation(valid, operation);
+  }
+
   deleteSongVersion = (songId: string, versionId: string) => {
     const valid = (newState: ISongListPanelState) => {
       return true;
@@ -150,6 +168,7 @@ export class SongListPanel extends Component<ISongListPanelProps, ISongListPanel
                     song={song}
                     renderFileUploader={renderFileUploader}
                     addSongVersion={this.addSongVersion}
+                    addComment={this.addComment}
                     handleChange={this.handleChange}
                     handleVolumeChange={this.handleVolumeChange}
                     volume={this.state.volume}

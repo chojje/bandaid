@@ -60,5 +60,19 @@ export class SongVersion {
   date: string; // other data type?
   name: string = "";
   url: string = "";
+  comments: SongComment[] = [];
   [key: string]: SongVersion[keyof SongVersion];
+}
+
+export class SongComment {
+  constructor(author: string, text: string, timestamp: string = "") {
+    this.id = uuidv4();
+    this.author = author;
+    this.text = text;
+    this.timestamp = timestamp;
+  }
+  id: string;
+  author: string;
+  text: string;
+  timestamp: string;
 }

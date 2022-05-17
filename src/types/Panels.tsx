@@ -51,6 +51,7 @@ export interface ISongCardProps {
   song: Song;
   renderFileUploader: ((callback: (url: string) => void) => ReactNode)
   addSongVersion(name: string, songId: string, url: string): void;
+  addComment(author: string, timestamp: string, comment: string, songId: string): void;
   handleChange(path: string, value: string): void;
   handleVolumeChange(volume: number): void;
   deleteSong(id: string): void;
@@ -60,8 +61,10 @@ export interface ISongCardProps {
 
 export interface ISongCardState {
   addSongVersionPopoverOpen: boolean;
+  addCommentPopoverOpen: boolean;
   deleteSongWarningOpen: boolean;
   songVersionsOpen: boolean;
+  commentsOpen: boolean;
 }
 
 export interface INewSongVersionFormState {

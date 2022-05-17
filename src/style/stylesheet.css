@@ -262,9 +262,44 @@ ul {
   flex-direction: column;
 }
 
+.song-card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.song-version-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.form-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
 .song-version-div {
   display: flex;
   flex-direction: column;
+}
+
+.comment-list-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-list-footer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 .landing-page-header {
@@ -294,6 +329,7 @@ ul {
 .audio-player {
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 80%;
 }
 
 .no-versions-div {

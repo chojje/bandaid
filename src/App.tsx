@@ -101,8 +101,9 @@ class App extends Component<IAppProps, IAppState> {
         this.fb.base.fetch(`projects/${user.uid}`, {
           context: this,
           then: (data: IDictProject) => {
+            const patchedProjects = this.patchProjects(data);
             this.setState({
-              projects: data,
+              projects: patchedProjects,
               loading: false,
             });
           },
@@ -118,6 +119,35 @@ class App extends Component<IAppProps, IAppState> {
     fetch(changelogPath).then((response) => response.text()).then((text) => {
       this.setState({ changelog: text });
     })
+  }
+
+  // hack?: this function patches old projects which break the site otherwise
+  patchProjects = (projects: IDictProject) => {
+    const newProjects: IDictProject = {};
+    for (const projectId in projects) {
+      const project = projects[projectId];
+      newProjects[projectId] = this.patchProject(project);
+    }
+    return newProjects;
+  }
+
+  patchProject = (project: IProject) => {
+    const newProject = Object.assign({}, project);
+    for (const songId in newProject.songs) {
+      const song = newProject.songs[songId];
+      if (song.currentSongVersion && !song.currentSongVersion.comments) {
+        song.currentSongVersion.comments = [];
+      }
+      if (song.previousSongVersions) {
+        for (const previousVersion of song.previousSongVersions) {
+          if (!previousVersion.comments) {
+            previousVersion.comments = [];
+          }
+        }
+      }
+      
+    }
+    return newProject;
   }
 
   componentWillUnmount() {
